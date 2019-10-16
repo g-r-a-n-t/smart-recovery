@@ -8,8 +8,6 @@ Recovery questions is a method of recovering access to one's account in the even
 
 This method of recovery has become less popular on traditional web-services with the introduction of multifactor authentication, but may be useful on smart contract platforms since it does not require a trusted third party.
 
-The goal of this project is to create a fund recovery service that a user can confidently recover their funds from with a reasonable amount of security.
-
 ## Model
 
 Let's say we have a malicious actor named *Alice* and a fund holder named *Bob*. Bob would like to store his funds behind a few recovery questions and Alice would like to steal these funds from Bob. For Alice to do so, she must obtain a set of answers to each of his recovery questions such that at least one answer is correct in each set. In order for her to compute the correct answer list, she must try every combination of the answer sets. So, if there are say, 6 questions, and each set has 10 possible answers, she will compute 1 million combinations. If she is completely confident in each answer, then she only needs to compute 1.
@@ -101,12 +99,12 @@ Questions used for recovery should have the following properties:
 | target    | `bytes32`                |
 
 ### Globals
-- `users: bytes32 -> Account`
+- `accounts: bytes32 -> Account`
 - `question_pool: [string, POOL_SIZE]`
 
 ### Methods
-- `create_user(key: bytes32, questions: [uint8, NUM_QUESTION], target: bytes32)`
-- `store_funds(key: bytes32, token: address, amount: uint256)`
+- `create_account(key: bytes32, questions: [uint8, NUM_QUESTION], target: bytes32)`
+- `increase_funds(key)`
 - `recover_funds(...)`
 
 ## Frontend Design
