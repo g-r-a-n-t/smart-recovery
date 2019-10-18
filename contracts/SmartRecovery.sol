@@ -20,6 +20,12 @@ contract SmartRecovery {
   mapping(bytes32 => Account) public accounts;
   string[] public questionPool;
 
+  constructor() public {
+    questions = [
+      ""
+    ]
+  }
+
   function createAccount(
     bytes32 key,
     uint8[] memory questions,
@@ -64,13 +70,13 @@ contract SmartRecovery {
   }
 
   function validProof(
-    address proover
+    address prover
   )
     internal
     view
     returns (bool)
   {
-    Proof memory proof = proofs[proover];
+    Proof memory proof = proofs[prover];
     Account memory account = accounts[proof.key];
     return now - proof.time > 2 minutes &&
            sha256(
